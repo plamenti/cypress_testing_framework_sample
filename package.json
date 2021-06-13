@@ -1,0 +1,18 @@
+{
+  "name": "wc2-cypress-framework",
+  "version": "1.0.0",
+  "description": "WC2 Test Automation Project with Cypress",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@git.pyrsoftware.ca:2222/~kostapla/wc2-cypress-framework.git"
+  },
+  "author": "Plamen Kostadinov, plamen_kostadinov@starsgroup.com, kostapla",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^7.5.0"
+  }
+}

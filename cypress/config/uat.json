@@ -1,0 +1,20 @@
+{
+    "env": {
+        "admin_page_base":"https://tools1-uat.pyrsoftware.ca:5556/",
+        "RAM1": {
+            "COM": "https://ram.uat.pyr/",
+            "BG": "https://ram.uat-bg.pyr/",
+            "UK": "https://ram.uat-uk.pyr/"
+        },
+        "STARSWEB": {
+            "COM": "N/A",
+            "BG": "N/A",
+            "UK": "N/A"
+        },
+        "regular_user": {
+            "COM": "wc2_com_001",
+            "BG": "wc2_bg_001",
+            "UK": "wc2_uk_001"
+        }
+    }
+}

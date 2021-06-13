@@ -1,0 +1,10 @@
+{
+    "chromeWebSecurity": false,
+    "viewportWidth": 1920,
+    "viewportHeight": 1080,
+    "screenshotOnRunFailure": true,
+    "screenshotsFolder": "cypress/screenshots",
+    "videoCompression": 32,
+    "videosFolder": "cypress/videos",
+    "trashAssetsBeforeRuns": true
+}

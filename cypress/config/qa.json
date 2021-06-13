@@ -1,0 +1,20 @@
+{
+    "env": {
+        "admin_page_base":"https://tools1-qa.pyrsoftware.ca:5556/",
+        "RAM1": {
+            "COM": "https://ram.qa.pyr/",
+            "BG": "https://ram.qa-bg.pyr/",
+            "UK": "https://ram.qa-uk.pyr/"
+        },
+        "STARSWEB": {
+            "COM": "https://starsweb.qa-sc.pyr/",
+            "BG": "https://starsweb.qa-bg-sc.pyr/en",
+            "UK": "https://starsweb.qa-uk-sc.pyr/"
+        },
+        "regular_user": {
+            "COM": "wc2_com_001",
+            "BG": "wc2_bg_001",
+            "UK": "wc2_uk_001"
+        }
+    }
+}
