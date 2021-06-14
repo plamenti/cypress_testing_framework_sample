@@ -4,7 +4,8 @@
   "description": "WC2 Test Automation Project with Cypress",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-qa-bg": "npx cypress open --env configFile=qa,env_type=RAM1,license=BG,password=MyTest123"
   },
   "repository": {
     "type": "git",
@@ -12,7 +13,11 @@
   },
   "author": "Plamen Kostadinov, plamen_kostadinov@starsgroup.com, kostapla",
   "license": "ISC",
-  "dependencies": {
-    "cypress": "^7.5.0"
+  "devDependencies": {
+    "cypress": "^7.5.0",
+    "cypress-cucumber-preprocessor": "^4.1.2"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": false
   }
 }

@@ -2,11 +2,15 @@ import PokerStarsHomePage from '../support/pages/pokerstars/PokerStarsHomePage'
 /// <reference types="cypress" />
 
 describe("Test Area", () => {
+    const page = new PokerStarsHomePage();
+
     before(() => {
         cy.log("Before all!");
     })
 
     beforeEach(() => {
+        cy.clearLocalStorage();
+        cy.clearCookies();
         cy.log("Before each!");
     })
 
@@ -23,8 +27,8 @@ describe("Test Area", () => {
     })
 
     it.only("Test navigation to home page", () => {
-        const page = new PokerStarsHomePage();
+        
         page.navigateTo();
-        page.login("wc2_com_001");
+        page.login();
     });
 })

@@ -11,6 +11,7 @@
 1. [Run Cypress](#run-cypress)
 1. [Cypress from the command line](https://docs.cypress.io/guides/guides/command-line)
 1. [Page Object Model pattern implementation](#pom-implementation)
+1. [Clear local storage and cookies](#clear-local-storage-and-cookies)
 1. [Keep passwords secret](#keep-passwords-secret)
 1. [Official Cypress Documentation](#official-cypress-documentation)
 
@@ -127,12 +128,23 @@ Cypress.Commands.add('getRegularUser', () => {
 })
 ```
 
+<a id="clear-local-storage-and-cookies"></a>
+## **Clear local storage and cookies**
+This is good to done before each test execution.
+In beforeEach hook add:
+```javascript
+beforeEach(() => {
+        cy.clearLocalStorage();
+        cy.clearCookies();
+    })
+```
+
 <a id="keep-passwords-secret"></a>
 ## **Keep passwords secret**
 Allways consider the best practices of how to pass passwords and tokens during Cypress tests to avoid accidentally revealing them in screenshots, videos and logs.
 For more information read [THIS](https://glebbahmutov.com/blog/keep-passwords-secret-in-e2e-tests/) blog.
 
-Example to secure run from terminal: `CYPRESS_password=MyTest123 npx cypress open --env configFile=qa,env_type=RAM1,license=COM`
+Example to secure run from terminal: `npx cypress open --env configFile=qa,env_type=RAM1,license=COM,password=MyTest123`
 
 IMPORTANT: Substitute password value with provided by credentials manager in Jenkins (for example)
 

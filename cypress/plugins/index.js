@@ -18,7 +18,7 @@ const path = require('path')
 function getConfigurationByFile(file) {
   const pathToConfigFile = path.resolve('cypress', 'config', `${file}.json`)
 
-  if(!fs.existsSync(pathToConfigFile)) {
+  if (!fs.existsSync(pathToConfigFile)) {
     console.log('No custom config found!');
     return {};
   }
@@ -26,8 +26,12 @@ function getConfigurationByFile(file) {
   return fs.readJson(pathToConfigFile)
 }
 
+const cucumber = require('cypress-cucumber-preprocessor').default
+
 // plugins file
 module.exports = (on, config) => {
+  on('file:preprocessor', cucumber())
+
   // accept a configFile value or use qa by default
   const file = config.env.configFile
 

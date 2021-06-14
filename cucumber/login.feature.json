@@ -1,0 +1,32 @@
+[
+  {
+    "keyword": "Feature",
+    "name": "Login Pokerstars Home page",
+    "line": 1,
+    "id": "login-pokerstars-home-page",
+    "tags": [],
+    "uri": "login.feature",
+    "elements": [
+      {
+        "id": "login-pokerstars-home-page;login-with-regular-user",
+        "keyword": "Scenario",
+        "line": 3,
+        "name": "Login with regular user",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "I open Google page",
+            "result": {
+              "status": "undefined",
+              "duration": 105000000
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

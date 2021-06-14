@@ -13,10 +13,10 @@ class PokerStarsHomePage {
     }
 
     login() {
-
+        cy.getRegularUser().then(userId => this.loginWithSpecificUser(userId));
     }
 
-    login(userId) {
+    loginWithSpecificUser(userId) {
         cy.get(this.loginButton).click();
         cy.get(this.usernameField).type(userId);
         const password = Cypress.env("password");
