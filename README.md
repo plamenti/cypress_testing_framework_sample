@@ -13,6 +13,7 @@
 1. [Page Object Model pattern implementation](#pom-implementation)
 1. [Clear local storage and cookies](#clear-local-storage-and-cookies)
 1. [Keep passwords secret](#keep-passwords-secret)
+1. [Reporting](#reporting)
 1. [Official Cypress Documentation](#official-cypress-documentation)
 
 
@@ -79,10 +80,26 @@ module.exports = (on, config) => {
 - by npx - **run in terminal**: `npx cypress open`
 - by using the full path - **run in terminal**: `./node_modules/.bin/cypress open`
 - by adding (updating runtime) environment varialbels - **run in terminal**: `npx cypress open --env configFile=uat,env_type=RAM1,license=COM`
+- by custom scripts - `npm run test-run-qa-bg`
+- by custom script and by tag - `npm run test-run-qa-bg -- 'TAGS=@focus'`
 
 <a id="setup-cucumber-support"></a>
 ## **Setup Cucumber support**
 https://www.npmjs.com/package/cypress-cucumber-preprocessor
+
+To setup generating of cucumber-json report add in `package.json`:
+
+```javascript
+"cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": false,
+    "cucumberJson": {
+      "generate": true,
+      "outputFolder": "cypress/cucumber-json",
+      "filePrefix": "",
+      "fileSuffix": ".cucumber"
+    }
+  }
+```
 
 <a id="pom-implementation"></a>
 ## **Page Object Model pattern implementation**
@@ -147,6 +164,68 @@ For more information read [THIS](https://glebbahmutov.com/blog/keep-passwords-se
 Example to secure run from terminal: `npx cypress open --env configFile=qa,env_type=RAM1,license=COM,password=MyTest123`
 
 IMPORTANT: Substitute password value with provided by credentials manager in Jenkins (for example)
+
+<a id="reporting"></a>
+## **Reporting**
+1. nstall multiple reporters **run in terminal**: `npm install --save-dev cypress-multi-reporters mocha-junit-reporter`
+1. Specify your reporter and reporterOptions in your configuration file (cypress.json by default)
+```javascript
+{
+  "reporter": "cypress-multi-reporters",
+  "reporterOptions": {
+    "configFile": "reporter-config.json"
+  }
+}
+```
+3. Add the separate reporter-config.json file (defined in your configuration) to enable spec and junit reporters and direct the junit reporter to save separate XML files
+```javascript
+{
+  "reporterEnabled": "spec, mocha-junit-reporter",
+  "mochaJunitReporterReporterOptions": {
+    "mochaFile": "cypress/results/results-[hash].xml"
+  }
+}
+```
+4. To combine  generated XML files into a single one, [junit-report-merger](https://www.npmjs.com/package/junit-report-merger) can be added. For example, to combine all files into cypress/results/combined-report.xml the combine:reports script can be added.
+```javascript
+{
+  "scripts": {
+    "delete:reports": "rm cypress/results/* || true",
+    "combine:reports": "jrm cypress/results/junit/combined-report.xml \"cypress/results/junit/*.xml\"",
+    "prereport": "npm run delete:reports",
+    "report": "cypress run --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json",
+    "postreport": "npm run combine:reports"
+  }
+}
+```
+
+5. To use Mochawesome JSON reports:
+
+**Run in terminal:** `npm install --save-dev mochawesome mochawesome-merge mochawesome-report-generator`
+
+
+6. Configure the reporter-config.json file to skip the HTML report generation and save each individual JSON file in the cypress/results folder.
+
+```javascript
+{
+    "reporterEnabled": "spec, mochawesome, mocha-junit-reporter",
+    "mochaJunitReporterReporterOptions": {
+      "mochaFile": "cypress/results/junit/results-[hash].xml"
+    },
+    "mochawesomeReporterOptions": {
+        "reportDir": "cypress/results/mochawesome",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      }
+}
+```
+
+7. Merge generated Mochawesome JSON reports:
+
+**Run in terminal:** `npx mochawesome-merge cypress/results/mochawesome/*.json > mochawesome.json && npx marge mochawesome.json`
+
+For more information check [HERE](https://docs.cypress.io/guides/tooling/reporters#Multiple-reporters).
 
 <a id="official-cypress-documentation"></a>
 ## **Official Cypress Documentation** - https://docs.cypress.io/

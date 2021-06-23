@@ -5,6 +5,9 @@ cypress/screenshots
 
 /build
 
+cypress/results
+cypress/cucumber-json
+
 # misc
 .DS_Store
 .idea

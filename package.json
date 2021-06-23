@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test-qa-bg": "npx cypress open --env configFile=qa,env_type=RAM1,license=BG,password=MyTest123"
+    "test-qa-bg": "npx cypress open --env configFile=qa,env_type=RAM1,license=BG,password=MyTest123",
+    "test-run-qa-bg": "npx cypress-tags run --env configFile=qa,env_type=RAM1,license=BG,password=MyTest123",
+    "delete:reports": "rm cypress/results/junit/* && rm cypress/results/mochawesome/* && rm cypress/cucumber-json/* || true",
+    "combine:reports": "jrm cypress/results/junit/combined-report.xml \"cypress/results/junit/*.xml\""
   },
   "repository": {
     "type": "git",
@@ -15,9 +18,22 @@
   "license": "ISC",
   "devDependencies": {
     "cypress": "^7.5.0",
-    "cypress-cucumber-preprocessor": "^4.1.2"
+    "cypress-cucumber-preprocessor": "^4.1.2",
+    "cypress-multi-reporters": "^1.5.0",
+    "junit-report-merger": "^2.2.2",
+    "mocha": "^9.0.1",
+    "mocha-junit-reporter": "^2.0.0",
+    "mochawesome": "^6.2.2",
+    "mochawesome-merge": "^4.2.0",
+    "mochawesome-report-generator": "^5.2.0"
   },
   "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": false
+    "nonGlobalStepDefinitions": false,
+    "cucumberJson": {
+      "generate": true,
+      "outputFolder": "cypress/cucumber-json",
+      "filePrefix": "",
+      "fileSuffix": ".cucumber"
+    }
   }
 }

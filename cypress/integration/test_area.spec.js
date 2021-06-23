@@ -30,5 +30,6 @@ describe("Test Area", () => {
         
         page.navigateTo();
         page.login();
+        page.openAccount();
     });
 })
